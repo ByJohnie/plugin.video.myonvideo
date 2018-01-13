@@ -17,7 +17,7 @@ serico = xbmc.translatePath(__Addon.getAddonInfo('path') + "/resources/serials-i
 catalogue = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0YWxvZ3VlLzE=')
 movi = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMzEvRmlsbWkvMQ==')
 ser = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMTkvU2VyaWFsaS8xLw==')
-sernext = bas64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMTkvU2VyaWFsaS8xLw==')
+sernext = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMTkvU2VyaWFsaS8xLw==')
 MUA = 'Mozilla/5.0 (Linux; Android 5.0.2; bg-bg; SAMSUNG GT-I9195 Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Version/1.0 Chrome/18.0.1025.308 Mobile Safari/535.19' #За симулиране на заявка от мобилно устройство
 UA = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0' #За симулиране на заявка от  компютърен браузър
 
