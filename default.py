@@ -18,7 +18,7 @@ catalogue = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0YWxvZ3VlLzE=')
 movi = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMzEvRmlsbWkvMQ==')
 ser = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMTkvU2VyaWFsaS8xLw==')
 sernext = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vY2F0ZWdvcnkvMTkvU2VyaWFsaS8xLw==')
-search = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vc2VhcmNoLnBocA==')
+search = base64.b64decode('aHR0cDovL215b252aWRlby5jb20vdGFncy8=')
 MUA = 'Mozilla/5.0 (Linux; Android 5.0.2; bg-bg; SAMSUNG GT-I9195 Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Version/1.0 Chrome/18.0.1025.308 Mobile Safari/535.19' #За симулиране на заявка от мобилно устройство
 UA = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0' #За симулиране на заявка от  компютърен браузър
 
@@ -221,7 +221,7 @@ def SEARCH(url):
        if (keyb.isConfirmed()):
            searchText = urllib.quote_plus(keyb.getText())
            searchText=searchText.replace(' ','+')
-           params = {'t':searchText, 'x':'26', 'y':'18'}
+           url = url + searchText
            req = urllib2.Request(url, urllib.urlencode(params))
            req.add_header('User-Agent', UA)
            response = urllib2.urlopen(req)
@@ -236,15 +236,14 @@ def SEARCH(url):
             descr = 'Липсва описание'
             addLink(title,movie,9,descr,thumbnail)
             br = br + 1
-           if br == 40: #тогава имаме следваща страница и конструираме нейния адрес
-            getpage=re.compile('</div><div class="pagination">\n<b>(.+?)</b><a href="(.+?)."').findall(data)
-            for page,baseurl in getpage:
-                newpage = int(page)+1
-                url = baseurl + str(newpage)
+           if br >= 35: #тогава имаме следваща страница и конструираме нейния адрес
+            getpage=re.compile('<a href="(.+?)/(\d+)/" class="next">Следващи').findall(data)
+            for baseurl,page in getpage:
+                newpage = int(page)
+                url = baseurl + '/' + str(newpage) + '/'
                 #print 'URL OF THE NEXT PAGE IS' + url
                 thumbnail='DefaultFolder.png'
                 addDir('следваща страница>>',url,6,thumbnail)
-
 
 
 #Модул за добавяне на отделно заглавие и неговите атрибути към съдържанието на показваната в Kodi директория - НЯМА НУЖДА ДА ПРОМЕНЯТЕ НИЩО ТУК
