@@ -109,11 +109,11 @@ def INDEXSERIALS(url):
         print 'tova e urlto' + url
         #Начало на обхождането
         br = 0
-        match = re.compile('<table.*(http.+?jpg).*\n.*\n.*\n.*\n<a href="(.+?)">.*<b>(.+?)</b></a>').findall(data)
+        match = re.compile('<table.*(http.+?jpg).*\n.*\n.*\n.*\n.*a href="(.+?)">.*<b>(.+?)</b></a>').findall(data)
         for thumbnail,url,title in match:
             addDir(title,url,2,thumbnail)
             br = br + 1
-        if br == 40: #тогава имаме следваща страница и конструираме нейния адрес
+        if br >= 38: #тогава имаме следваща страница и конструираме нейния адрес
             getpage=re.compile('(.*)(\d+)').findall(url)
             for baseurl,page in getpage:
                 newpage = int(page)+1
@@ -132,7 +132,7 @@ def INDEXSERPAGES(url):
         print 'tova e url' + url
         #Начало на обхождането
         br = 0
-        match = re.compile('<table.*(http.+?jpg).*\n.*\n.*\n.*\n<a href="(.+?)">.*<b>(.+?)</b></a>').findall(data)
+        match = re.compile('<table.*(http.+?jpg).*\n.*\n.*\n.*\n.*a href="(.+?)">.*<b>(.+?)</b></a>').findall(data)
         for thumbnail,url,title in match:
             addDir(title,url,2,thumbnail)
             br = br + 1
