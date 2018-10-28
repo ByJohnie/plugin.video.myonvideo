@@ -172,20 +172,22 @@ def INDEXMOVPAGES(url):
                 addDir('следваща страница>>',url,6,thumbnail)
 
 def SHOW(url):
-        req = urllib2.Request(url)
-        req.add_header('User-Agent', UA)
-        response = urllib2.urlopen(req)
-        #print 'request page url:' + url
-        data=response.read()
+        from mechanize import Browser
+        br = Browser()
+        br.set_handle_robots( False )
+        br.addheaders = [('User-agent', 'Firefox')]
+        br.open(url)
+        response = br.open(url)
+        data = response.read()
         response.close()
-        br = 0
-        match = re.compile('<span class="bold">(.+?)</span>.*\n<iframe.*src="(.+?)"').findall(data)
+        cr = 0
+        match = re.compile('<span class="bold">(.+?)</span>.*\n.*src="(.+?)"').findall(data)
         #matchi = re.compile('<link rel="image_src" href="(.+?)"').findall(data)
         for server,link in match:
          #for thumbnail in match:
           title = 'Сървър-' + server + name
           addLink2(name,link,10,iconimage,title)
-          br = br + 1
+          cr = cr + 1
 
 
 
